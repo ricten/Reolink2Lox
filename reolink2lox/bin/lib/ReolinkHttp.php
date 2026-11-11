@@ -6,7 +6,7 @@
  */
 final class ReolinkHttp
 {
-    private const int MAX_BYTES = 4194304;
+    private const MAX_BYTES = 4194304;
 
     /**
      * POST mit JSON-Koerper.

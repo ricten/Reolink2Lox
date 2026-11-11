@@ -11,7 +11,7 @@
 final class ReolinkMapper
 {
     /** KI-Art der Kamera => Topic-Name. Unbekannte Arten werden auf a-z, 0-9, _ bereinigt. */
-    public const array KI_NAMEN = ['people' => 'person', 'vehicle' => 'fahrzeug', 'dog_cat' => 'tier', 'face' => 'gesicht', 'package' => 'paket', 'visitor' => 'besucher'];
+    public const KI_NAMEN = ['people' => 'person', 'vehicle' => 'fahrzeug', 'dog_cat' => 'tier', 'face' => 'gesicht', 'package' => 'paket', 'visitor' => 'besucher'];
 
     public static function kiName(string $art): string
     {

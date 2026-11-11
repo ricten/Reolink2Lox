@@ -12,7 +12,7 @@
 final class ReolinkCommands
 {
     /** Befehl => [Stufe, erlaubte Werte als Regex, Bezeichnung]. */
-    public const array LISTE = [
+    public const LISTE = [
         'scheinwerfer' => ['licht', '/^[01]$/', 'Scheinwerfer (1 an, 0 aus)'],
         'scheinwerfer_modus' => ['licht', '/^[0-3]$/', 'Betriebsart des Scheinwerfers (0 aus, 1 automatisch, 2 nachts, 3 Zeitplan)'],
         'scheinwerfer_helligkeit' => ['licht', '/^(100|[1-9]?[0-9])$/', 'Helligkeit des Scheinwerfers in Prozent (0–100)'],
@@ -30,17 +30,17 @@ final class ReolinkCommands
         'ftp' => ['einstellungen', '/^[01]$/', 'FTP-Upload der Kamera bei Alarm (1 an, 0 aus)'],
     ];
 
-    private const array PTZ_OPS = ['links' => 'Left', 'rechts' => 'Right', 'hoch' => 'Up', 'runter' => 'Down', 'links_hoch' => 'LeftUp', 'links_runter' => 'LeftDown',
+    private const PTZ_OPS = ['links' => 'Left', 'rechts' => 'Right', 'hoch' => 'Up', 'runter' => 'Down', 'links_hoch' => 'LeftUp', 'links_runter' => 'LeftDown',
         'rechts_hoch' => 'RightUp', 'rechts_runter' => 'RightDown', 'stopp' => 'Stop', 'zoom_plus' => 'ZoomInc', 'zoom_minus' => 'ZoomDec'];
 
     /** Welche Werte ein Befehl danach neu gelesen werden (Schluessel von ReolinkCamera::LESEN). */
-    private const array NACH = [
+    private const NACH = [
         'scheinwerfer' => 'whiteled', 'scheinwerfer_modus' => 'whiteled', 'scheinwerfer_helligkeit' => 'whiteled', 'ir' => 'ir', 'status_led' => 'powerled',
         'zoom' => 'zoomfocus', 'fokus' => 'zoomfocus', 'autofokus' => 'autofokus', 'aufnahme' => 'rec', 'push' => 'push', 'email' => 'email', 'ftp' => 'ftp',
     ];
 
     /** Zeitplan "ganztags" (von 0:00 bis 23:59) fuer den Scheinwerfer. */
-    public const array GANZTAGS = ['StartHour' => 0, 'StartMin' => 0, 'EndHour' => 23, 'EndMin' => 59];
+    public const GANZTAGS = ['StartHour' => 0, 'StartMin' => 0, 'EndHour' => 23, 'EndMin' => 59];
 
     /** Ist der Zeitplan der Kamera ganztags? */
     public static function istGanztags(array $z): bool

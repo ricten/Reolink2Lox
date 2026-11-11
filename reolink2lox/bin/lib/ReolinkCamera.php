@@ -10,12 +10,12 @@
  */
 final class ReolinkCamera
 {
-    private const float MIN_ABSTAND = 0.25;     // Sekunden zwischen zwei Anfragen
-    private const int REFRESH = 300;            // Sekunden: alle Werte auch ohne Aenderung erneut senden
-    private const int ACK_TIMEOUT = 30;         // Sekunden bis "keine Antwort der Kamera" fuer einen Befehl in der Warteschlange
-    private const int MAX_WARTESCHLANGE = 10;
-    private const int FEHLER_BIS_GETRENNT = 3;  // aufeinanderfolgende Fehlschlaege bis die Verbindung als verloren gilt
-    private const float MIN_BEFEHLSABSTAND = 0.3;
+    private const MIN_ABSTAND = 0.25;     // Sekunden zwischen zwei Anfragen
+    private const REFRESH = 300;            // Sekunden: alle Werte auch ohne Aenderung erneut senden
+    private const ACK_TIMEOUT = 30;         // Sekunden bis "keine Antwort der Kamera" fuer einen Befehl in der Warteschlange
+    private const MAX_WARTESCHLANGE = 10;
+    private const FEHLER_BIS_GETRENNT = 3;  // aufeinanderfolgende Fehlschlaege bis die Verbindung als verloren gilt
+    private const MIN_BEFEHLSABSTAND = 0.3;
 
     public string $name;
     private ReolinkApi $api;

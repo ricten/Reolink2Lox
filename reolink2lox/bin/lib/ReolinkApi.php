@@ -8,12 +8,12 @@
  */
 final class ReolinkApi
 {
-    public const string ART_VERBINDUNG = 'verbindung';     // Kamera nicht erreichbar
-    public const string ART_ANMELDUNG = 'anmeldung';       // Benutzer oder Passwort falsch
-    public const string ART_SITZUNGEN = 'sitzungen';       // zu viele Anmeldungen an der Kamera
-    public const string ART_DIENST = 'dienst';             // Webdienst der Kamera antwortet mit Fehler (z. B. 502)
-    public const string ART_ANTWORT = 'antwort';           // unverstaendliche Antwort
-    public const string ART_RECHT = 'recht';               // Benutzer darf das nicht (ability error)
+    public const ART_VERBINDUNG = 'verbindung';     // Kamera nicht erreichbar
+    public const ART_ANMELDUNG = 'anmeldung';       // Benutzer oder Passwort falsch
+    public const ART_SITZUNGEN = 'sitzungen';       // zu viele Anmeldungen an der Kamera
+    public const ART_DIENST = 'dienst';             // Webdienst der Kamera antwortet mit Fehler (z. B. 502)
+    public const ART_ANTWORT = 'antwort';           // unverstaendliche Antwort
+    public const ART_RECHT = 'recht';               // Benutzer darf das nicht (ability error)
 
     public string $lastError = '';
     public string $lastArt = '';

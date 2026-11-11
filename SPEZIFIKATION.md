@@ -1,6 +1,6 @@
 # Spezifikation Reolink2Lox
 
-Stand: 0.1.1 (Beta), 2026-11-11. Ersetzt den ioBroker-Adapter `reolink`. Dieses Dokument hält fest, was das Plugin tut und was bei den Versuchen an der echten Kamera herausgekommen ist.
+Stand: 0.1.2 (Beta), 2026-11-11. Ersetzt den ioBroker-Adapter `reolink`. Dieses Dokument hält fest, was das Plugin tut und was bei den Versuchen an der echten Kamera herausgekommen ist.
 
 ## 1. Ziel
 

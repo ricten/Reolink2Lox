@@ -1,13 +1,13 @@
 # Reolink2Lox – LoxBerry-Plugin
 <img src="docs/logo/reolink2lox.png" alt="Reolink2Lox Logo" width="128">
 
-**Version 0.1.1** · Benötigt LoxBerry 4 (PHP ≥ 8.4) · [Changelog](CHANGELOG.md)
+**Version 0.1.2** · Benötigt LoxBerry 4 (PHP ≥ 8.2) · [Changelog](CHANGELOG.md)
 
 Dokumentation: [docs/wiki/Home.md](docs/wiki/Home.md)
 
 Fragt **Reolink-Kameras** über deren lokale HTTP-API ab (HTTPS oder HTTP, ohne Cloud) und veröffentlicht Bewegung, KI-Erkennung (Person, Fahrzeug, Tier), Licht, Zoom, Aufnahme und mehr per MQTT am LoxBerry-Broker (→ MQTT-Gateway → Loxone). Dazu Befehle aus Loxone (Scheinwerfer, Infrarot, Status-LED, Schwenken, Zoom, Fokus, Positionen, Sirene, Aufnahme, Push, E-Mail, FTP), ab Werk gesperrt und mit Quittung. Bis zu **fünf Kameras**. Ersetzt den ioBroker-Adapter `reolink`. Reolink-Kameras haben keinen MQTT-Anschluss; das Plugin ist die Brücke.
 
-**Beta (0.1.1): geprüft ist bisher eine RLC-823S1** (Schwenk-Neige-Kamera mit Scheinwerfer, Firmware v3.1.0.4885): Auslesen, Licht, Zoom, Fokus, Schwenken, gespeicherte Positionen, Aufnahme, Push, E-Mail, FTP und die Sirene (einmal abspielen und stoppen). Andere Modelle sind nach der API-Beschreibung der Bibliothek `reolink_aio` umgesetzt und erkennen über die Fähigkeiten der Kamera, was sie können (Spezifikation: [SPEZIFIKATION.md](SPEZIFIKATION.md)).
+**Beta (0.1.2): geprüft ist bisher eine RLC-823S1** (Schwenk-Neige-Kamera mit Scheinwerfer, Firmware v3.1.0.4885): Auslesen, Licht, Zoom, Fokus, Schwenken, gespeicherte Positionen, Aufnahme, Push, E-Mail, FTP und die Sirene (einmal abspielen und stoppen). Andere Modelle sind nach der API-Beschreibung der Bibliothek `reolink_aio` umgesetzt und erkennen über die Fähigkeiten der Kamera, was sie können (Spezifikation: [SPEZIFIKATION.md](SPEZIFIKATION.md)).
 
 ## Voraussetzungen an der Kamera
 - In der Kamera muss der Zugriff über **HTTPS oder HTTP** aktiv sein (Reolink-App oder Weboberfläche → Einstellungen → Netzwerk → Erweitert → Server-Einstellungen). Das Plugin probiert erst HTTPS, dann HTTP.

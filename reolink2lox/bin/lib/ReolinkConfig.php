@@ -5,15 +5,15 @@
  */
 final class ReolinkConfig
 {
-    public const int MAX_KAMERAS = 5;
+    public const MAX_KAMERAS = 5;
     /** Stufen der Befehlsfreigabe je Kamera. */
-    public const array STUFEN = [
+    public const STUFEN = [
         'licht' => 'Licht (Scheinwerfer, Infrarot, Status-LED)',
         'ptz' => 'Schwenken, Neigen, Zoom, Fokus',
         'sirene' => 'Sirene',
         'einstellungen' => 'Aufnahme und Meldungen (Aufnahme, Push, E-Mail, FTP)',
     ];
-    public const array SCHEMEN = ['auto' => 'automatisch (erst HTTPS, dann HTTP)', 'https' => 'HTTPS', 'http' => 'HTTP'];
+    public const SCHEMEN = ['auto' => 'automatisch (erst HTTPS, dann HTTP)', 'https' => 'HTTPS', 'http' => 'HTTP'];
 
     public static function defaultKamera(string $name = ''): array
     {

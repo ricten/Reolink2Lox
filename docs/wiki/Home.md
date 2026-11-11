@@ -4,7 +4,7 @@
 
 **Reolink2Lox** ist ein LoxBerry-Plugin, das **Reolink-Kameras** über deren lokale HTTP-API abfragt und die Werte an den MQTT-Broker des LoxBerry veröffentlicht. Über das LoxBerry-MQTT-Gateway gelangen sie an den Loxone Miniserver. Es nimmt außerdem Befehle aus Loxone an (Scheinwerfer, Infrarot, Schwenken, Zoom, Aufnahme …). Es ersetzt den ioBroker-Adapter `reolink`. Reolink-Kameras haben keinen MQTT-Anschluss; das Plugin ist die Brücke.
 
-> **Stand: Beta (0.1.1).** Geprüft ist bisher eine **RLC-823S1** (Schwenk-Neige-Kamera mit Scheinwerfer, Firmware v3.1.0.4885): Auslesen, Licht, Zoom, Fokus, Schwenken, gespeicherte Positionen, Aufnahme, Push, E-Mail, FTP und die Sirene (einmal abspielen und stoppen). Andere Modelle sind nach der API-Beschreibung der Bibliothek `reolink_aio` umgesetzt; das Plugin liest die Fähigkeiten der Kamera und bietet nur an, was sie kann. Rückmeldungen sind willkommen.
+> **Stand: Beta (0.1.2).** Geprüft ist bisher eine **RLC-823S1** (Schwenk-Neige-Kamera mit Scheinwerfer, Firmware v3.1.0.4885): Auslesen, Licht, Zoom, Fokus, Schwenken, gespeicherte Positionen, Aufnahme, Push, E-Mail, FTP und die Sirene (einmal abspielen und stoppen). Andere Modelle sind nach der API-Beschreibung der Bibliothek `reolink_aio` umgesetzt; das Plugin liest die Fähigkeiten der Kamera und bietet nur an, was sie kann. Rückmeldungen sind willkommen.
 
 ## Was kann das Plugin?
 
@@ -32,7 +32,7 @@
 ## Voraussetzungen
 
 - LoxBerry ≥ 4.0 mit aktivem MQTT-Broker (Mosquitto) und MQTT-Gateway (oder eigener Broker)
-- PHP ≥ 8.4 (bei LoxBerry 4 dabei)
+- PHP ≥ 8.2 (bei LoxBerry 4 dabei)
 - Eine Reolink-Kamera im selben Netz mit aktivem HTTPS- oder HTTP-Zugriff und einem Benutzer für das Plugin (Schalten braucht einen Administrator; siehe [Installation](Installation.md))
 
 ## Lizenz

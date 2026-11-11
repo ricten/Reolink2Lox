@@ -5,9 +5,9 @@
 ^ Autor | Rico Tengler |
 ^ Logo | {{:plugins:reolink2lox:reolink2lox.png?64|Reolink2Lox}} |
 ^ Status | BETA |
-^ Version | 0.1.1 |
-^ Min. LB Version | 4.0 (benötigt PHP 8.4) |
-^ Release Download | [[https://github.com/ricten/Reolink2Lox/releases/latest|GitHub Releases (aktuelle Version)]] \\ [[https://github.com/ricten/Reolink2Lox/releases/download/v0.1.1/reolink2lox-0.1.1.zip|reolink2lox-0.1.1.zip]] |
+^ Version | 0.1.2 |
+^ Min. LB Version | 4.0 (benötigt PHP 8.2 oder neuer) |
+^ Release Download | [[https://github.com/ricten/Reolink2Lox/releases/latest|GitHub Releases (aktuelle Version)]] \\ [[https://github.com/ricten/Reolink2Lox/releases/download/v0.1.2/reolink2lox-0.1.2.zip|reolink2lox-0.1.2.zip]] |
 ^ Pre-Release Download | - |
 ^ Quellcode | [[https://github.com/ricten/Reolink2Lox|github.com/ricten/Reolink2Lox]] (MIT-Lizenz) |
 ^ Beschreibung | Fragt Reolink-Kameras über ihre lokale HTTP-API ab (kein Cloud-Zugriff) und veröffentlicht Bewegung, KI-Erkennung (Person, Fahrzeug, Tier), Licht, Zoom, Aufnahme und mehr per MQTT. Über das LoxBerry-MQTT-Gateway gelangen die Werte an den Loxone Miniserver. Dazu Befehle aus Loxone (Scheinwerfer, Infrarot, Schwenken, Zoom, Positionen, Aufnahme, Push, E-Mail, FTP, Sirene), ab Werk gesperrt und mit Quittung. Bis zu fünf Kameras. Ersatz für den ioBroker-Adapter reolink. |
@@ -208,5 +208,6 @@ Weitere Hinweise: [[https://github.com/ricten/Reolink2Lox/blob/main/docs/wiki/Fe
 ===== 8. Changelog =====
 
 ^ Version ^ Änderung ^
+| 0.1.2 | Läuft auch mit PHP 8.2 und 8.3 (bisher PHP 8.4 nötig) |
 | 0.1.1 | Schnellere Abfragen (Antwort endet mit Content-Length, auch wenn die Kamera die Verbindung offen hält); „Sofort abrufen“ und „Selbstprüfung“ nutzen die Werte des laufenden Dienstes |
 | 0.1.0 | Erste Version (Beta): Abfrage von bis zu fünf Reolink-Kameras über die lokale HTTP-API, Bewegung und KI-Erkennung, Licht, Zoom, Aufnahme und mehr, Befehle in vier Stufen (ab Werk gesperrt, mit Quittung), automatische Updates, Weboberfläche im LoxBerry Design System. Geprüft an einer RLC-823S1 (ohne Sirene) |
