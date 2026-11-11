@@ -1,0 +1,18 @@
+{
+ "cmd": "GetAudioAlarmV20",
+ "code": 0,
+ "value": {
+  "Audio": {
+   "enable": 0,
+   "schedule": {
+    "channel": 0,
+    "table": {
+     "AI_DOG_CAT": "11111111...",
+     "AI_PEOPLE": "11111111...",
+     "AI_VEHICLE": "11111111...",
+     "MD": "11111111..."
+    }
+   }
+  }
+ }
+}

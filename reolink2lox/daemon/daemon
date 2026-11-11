@@ -1,0 +1,3 @@
+#!/bin/bash
+su loxberry -s /bin/bash -c "REPLACELBPBINDIR/start.sh"
+exit 0

@@ -1,0 +1,212 @@
+====== Reolink2Lox ======
+
+===== Plugin-Daten =====
+
+^ Autor | Rico Tengler |
+^ Logo | {{:plugins:reolink2lox:reolink2lox.png?64|Reolink2Lox}} |
+^ Status | BETA |
+^ Version | 0.1.1 |
+^ Min. LB Version | 4.0 (benötigt PHP 8.4) |
+^ Release Download | [[https://github.com/ricten/Reolink2Lox/releases/latest|GitHub Releases (aktuelle Version)]] \\ [[https://github.com/ricten/Reolink2Lox/releases/download/v0.1.1/reolink2lox-0.1.1.zip|reolink2lox-0.1.1.zip]] |
+^ Pre-Release Download | - |
+^ Quellcode | [[https://github.com/ricten/Reolink2Lox|github.com/ricten/Reolink2Lox]] (MIT-Lizenz) |
+^ Beschreibung | Fragt Reolink-Kameras über ihre lokale HTTP-API ab (kein Cloud-Zugriff) und veröffentlicht Bewegung, KI-Erkennung (Person, Fahrzeug, Tier), Licht, Zoom, Aufnahme und mehr per MQTT. Über das LoxBerry-MQTT-Gateway gelangen die Werte an den Loxone Miniserver. Dazu Befehle aus Loxone (Scheinwerfer, Infrarot, Schwenken, Zoom, Positionen, Aufnahme, Push, E-Mail, FTP, Sirene), ab Werk gesperrt und mit Quittung. Bis zu fünf Kameras. Ersatz für den ioBroker-Adapter reolink. |
+^ Sprachen | DE |
+^ Diskussion | FORUM-LINK-EINTRAGEN |
+
+----
+
+===== 1. Überblick =====
+
+**Reolink2Lox** meldet sich an der **lokalen HTTP-API** der Reolink-Kamera an (HTTPS mit selbst signiertem Zertifikat oder HTTP, Port 443 oder 80) und stellt die Werte als **MQTT-Topics** auf dem MQTT-Broker des LoxBerry bereit. Das LoxBerry-MQTT-Gateway macht daraus **virtuelle Eingänge** für den Loxone Miniserver. In der Gegenrichtung nimmt das Plugin **Befehle** aus Loxone an und gibt sie an die Kamera weiter. Reolink-Kameras haben keinen MQTT-Anschluss; das Plugin ist die Brücke. Nichts läuft über die Reolink-Cloud.
+
+  Kamera (HTTP-API)  <->  Reolink2Lox (LoxBerry)  <->  MQTT-Broker  <->  MQTT-Gateway  <->  Miniserver
+
+**Stand: Beta.** Am echten Gerät geprüft ist bisher eine **Reolink RLC-823S1** (Schwenk-Neige-Kamera mit Scheinwerfer, Firmware v3.1.0.4885): Auslesen, Scheinwerfer, Infrarot, Status-LED, Zoom, Fokus, Autofokus, Schwenken, gespeicherte Positionen, Aufnahme, Push, E-Mail und FTP sowie die Sirene (einmal abspielen und stoppen). **Andere Modelle** sind nach der inoffiziellen API-Beschreibung der Bibliothek [[https://github.com/starkillerOG/reolink_aio|reolink_aio]] umgesetzt; das Plugin liest die Fähigkeiten der Kamera und bietet nur an, was sie kann. Rückmeldungen zu anderen Modellen sind ausdrücklich erwünscht.
+
+Eigenschaften:
+
+  * Bis zu **5 Kameras**, jede unter eigenem Namen (''reolink/hof/…'')
+  * **Erkennung:** Bewegung und KI-Erkennung (Person, Fahrzeug, Tier; je nach Modell Gesicht, Paket, Besucher) im Sekundentakt, dazu ''alarm'' und der Zeitstempel ''alarm_ts''
+  * **Licht:** Scheinwerfer (Zustand, Betriebsart, Helligkeit), Infrarot-Licht, Status-LED
+  * **Objektiv:** Zoom, Fokus, Autofokus
+  * **Aufnahme und Meldungen:** Aufnahme (Zeitplan), Push, E-Mail, FTP der Kamera ein/aus
+  * **Kamera:** Last, Speicherkarte, Modell, Firmware
+  * **Befehle aus Loxone** (ab Werk gesperrt, je Kamera in vier Stufen freizugeben, mit Quittung): Scheinwerfer, Infrarot, Status-LED, Schwenken, gespeicherte Positionen, Zoom, Fokus, Autofokus, Sirene, Aufnahme, Push, E-Mail, FTP
+  * Veröffentlicht nur **Änderungen** (alle 5 Minuten alle Werte)
+  * MQTT-Broker des LoxBerry **oder eigener Broker**
+  * Lebenszeichen (''reolink/status/ok'', ''zaehler'', ''ts''), Autostart, Watchdog, Healthcheck
+
+===== 2. Installation =====
+
+  - ZIP von der Release-Seite herunterladen.
+  - **An der Kamera** (Reolink-App oder Weboberfläche) unter //Einstellungen → Netzwerk → Erweitert → Server-Einstellungen// **HTTPS oder HTTP** einschalten.
+  - **Benutzer anlegen:** Für das Plugin einen eigenen Benutzer in der Kamera anlegen. **Lesen** geht mit einem normalen Benutzer, **Schalten** braucht einen **Administrator**.
+  - LoxBerry → **Plugin-Verwaltung** → **Plugin installieren**. Die Installation startet den Dienst.
+  - Plugin **Reolink2Lox** öffnen, Reiter **Kameras**: Host/IP, Benutzer und Passwort eintragen, **Aktiv** anhaken, speichern.
+  - Im **MQTT Gateway** das Abo ''reolink/#'' eintragen (siehe 5.1). Der Reiter **MQTT** zeigt, ob es steht.
+  - Reiter **Test** → **Selbstprüfung** und **Sofort abrufen**. Nach wenigen Sekunden erscheinen Werte unter ''reolink/<name>/*''.
+
+==== 2.1 Update ====
+
+Als Update installieren. Konfiguration und Daten bleiben erhalten; neue Einstellungen ergänzt das Plugin automatisch mit Standardwerten.
+
+**Automatische Updates:** Reolink2Lox liefert eine ''release.cfg'' im GitHub-Repository mit. Neue Installationen stehen in der Plugin-Verwaltung bei „Automatische Updates“ auf //Releases//: LoxBerry prüft täglich und installiert neuere Versionen selbst. Die Einstellung (//Aus//, //Benachrichtigen//, //Releases//) lässt sich in der Plugin-Verwaltung ändern.
+
+**Immer das neueste Release:** [[https://github.com/ricten/Reolink2Lox/releases/latest/download/reolink2lox.zip|reolink2lox.zip]] (ZIP ohne Version im Dateinamen, zeigt immer auf die aktuelle Version).
+
+==== 2.2 Deinstallation ====
+
+Plugin entfernen. Dienst und RAM-Daten werden gelöscht. An der Kamera bleibt alles, wie es ist.
+
+===== 3. Konfiguration (LoxBerry) =====
+
+Reiter: **Kameras · MQTT · Einbindung in Loxone · Test · Logdateien**. Änderungen wirken ohne Neustart; jeder Reiter speichert nur seine eigenen Einstellungen.
+
+==== 3.1 Kameras ====
+
+Bis zu fünf Einträge. Ein Kästchen zeigt den Zustand (grün verbunden, grau nicht aktiv, rot Fehler mit Text).
+
+^ Spalte ^ Beschreibung ^
+| Aktiv | Nur aktive Einträge werden abgefragt |
+| Name im Topic | ''a-z 0-9 _ -'', leer = ''kamera1'', ''kamera2'' … |
+| Host/IP, Port | Adresse der Kamera im Heimnetz; Port leer = Standard (443 bei HTTPS, 80 bei HTTP) |
+| Zugriff | automatisch (erst HTTPS, dann HTTP), nur HTTPS oder nur HTTP |
+| Benutzer, Passwort | Anmeldung an der Kamera. Das Passwort wird nie angezeigt, nie geloggt und nie per MQTT gesendet. Ein leeres Feld behält das gespeicherte Passwort |
+| Befehle freigeben | Vier Stufen (siehe 3.2), ab Werk alle aus |
+
+Die Kamera verwendet ein **selbst signiertes Zertifikat**, das das Plugin nicht prüft (das Gerät steht im Heimnetz). Bei **falschem Passwort** probiert das Plugin nur selten erneut (nach 1, 2, 4, 8 und dann alle 15 Minuten), damit die Kamera den Zugang nicht sperrt. Die Kamera erlaubt nur wenige gleichzeitige Anmeldungen: das Plugin meldet sich einmal an und nutzt die Sitzung weiter.
+
+==== 3.2 Befehle freigeben ====
+
+^ Stufe ^ Befehle ^
+| Licht | Scheinwerfer, Betriebsart und Helligkeit des Scheinwerfers, Infrarot-Licht, Status-LED |
+| Schwenken, Neigen, Zoom, Fokus | Richtungsbefehle (fahren 1 s, dann stoppt das Plugin selbst), gespeicherte Position, Zoom, Fokus, Autofokus |
+| Sirene | Alarmton einmal abspielen (an der RLC-823S1 geprüft) |
+| Aufnahme und Meldungen | Aufnahme (Zeitplan), Push, E-Mail, FTP der Kamera ein/aus |
+
+Nie vorgesehen: Neustart, Zurücksetzen, Firmware, Benutzer, Netzwerk, Formatieren der Speicherkarte.
+
+==== 3.3 Allgemein ====
+
+^ Einstellung ^ Standard ^ Beschreibung ^
+| Bewegung und KI-Erkennung abfragen alle … Sekunden | 1 s | 1–10 s |
+| Einstellungen und Werte abfragen alle … Sekunden | 30 s | 10–3600 s; Licht, Zoom, Aufnahme, Meldungen, Last, Speicherkarte |
+| Richtungsbefehl: so viele Sekunden fährt die Kamera | 1 s | 1–10 s; danach stoppt das Plugin die Kamera selbst |
+| Geschwindigkeit beim Schwenken und Anfahren von Positionen | 32 | 1–64 |
+
+Die Kamera ist empfindlich: Das Plugin sendet höchstens vier Anfragen pro Sekunde und Kamera.
+
+==== 3.4 MQTT-Broker (Reiter MQTT) ====
+
+Oben zeigt ein farbiges Feld das **Gateway-Abo** (grün ab einem passenden Abo, rot nur ohne Abo).
+
+^ Einstellung ^ Standard ^ Beschreibung ^
+| Eigenen MQTT-Broker verwenden | aus | Aus: Broker des LoxBerry (Zugangsdaten verwaltet LoxBerry) |
+| Host/IP, Port | - / 1883 | Eigener Broker (ohne TLS) |
+| Benutzer, Passwort | leer | Optional; das Passwort wird nie angezeigt oder geloggt |
+
+Das ist nicht die Kamera. Mit eigenem Broker erreichen die Werte den Miniserver nur, wenn das MQTT-Gateway diesen Broker abonniert.
+
+==== 3.5 Test und Logdateien ====
+
+^ Aktion ^ Wirkung ^
+| Sofort abrufen | Zeigt (vom laufenden Dienst, sonst nach eigener Anmeldung) alle Topics und Werte, die das Plugin veröffentlichen würde, und die Befehle, die die Kamera kennt |
+| Selbstprüfung | Konfiguration, Anmeldung je Kamera, Broker, Gateway-Abo, Dienst |
+| Dienst neu starten | Beendet und startet den Dienst |
+
+Der Loglevel wird in der LoxBerry-Plugin-Verwaltung eingestellt.
+
+===== 4. MQTT-Topics (Referenz) =====
+
+Schema ''reolink/<name>/<wert>'', Zahlen mit Punkt ohne Einheit, Zustände 0/1, nicht retained. Werte, die eine Kamera nicht liefert, werden nicht gesendet. Die vollständige Liste steht im [[https://github.com/ricten/Reolink2Lox/blob/main/docs/wiki/MQTT-Topics.md|Repository]] und im Plugin im Reiter //Einbindung in Loxone//.
+
+^ Topic ^ Bedeutung ^
+| ''verbunden'' | 1 = Verbindung zur Kamera steht und sie antwortet |
+| ''bewegung'' | 1 = Bewegungserkennung der Kamera ausgelöst |
+| ''person'', ''fahrzeug'', ''tier'' | 1 = KI-Erkennung ausgelöst (je nach Modell auch ''gesicht'', ''paket'', ''besucher'') |
+| ''alarm'', ''alarm_ts'' | 1, solange Bewegung oder KI ausgelöst ist; Unix-Zeitstempel des letzten Beginns |
+| ''licht/scheinwerfer'', ''licht/scheinwerfer_modus'', ''licht/scheinwerfer_helligkeit'' | Scheinwerfer leuchtet (0/1), Betriebsart (0 aus, 1 automatisch, 2 nachts, 3 Zeitplan), Helligkeit in % |
+| ''licht/ir'', ''licht/status_led'' | Infrarot-Licht (1 automatisch oder an), Status-LED |
+| ''ptz/zoom'', ''ptz/fokus'', ''ptz/autofokus'' | Zoom- und Fokusposition, Autofokus an |
+| ''aufnahme'', ''meldung/push'', ''meldung/email'', ''meldung/ftp'' | Aufnahme, Push, E-Mail, FTP der Kamera eingeschaltet |
+| ''sd/vorhanden'', ''sd/kapazitaet_gb'', ''sd/frei_gb'', ''sd/belegt_prozent'' | Speicherkarte (Größe, frei und Belegung nur mit Karte) |
+| ''system/cpu_prozent'', ''system/netz_kbit'', ''system/codec_kbit'' | Last, Netzdurchsatz und Datenrate laut Kamera |
+| ''info/modell'', ''info/firmware'', ''info/name'' | aus der Antwort der Kamera |
+| ''reolink/status/ok'' | 1 = alle Kameras in Ordnung (eine nicht erreichbare Kamera oder ein falsches Passwort ergibt 0); der Broker setzt 0, wenn der Dienst abbricht |
+| ''reolink/status/zaehler'' | Lebenszeichen 0–999, zählt alle 10 s |
+| ''reolink/status/ts'' | Zeitstempel des letzten Lebenszeichens |
+| ''reolink/befehl/<name>/<befehl>'' | Eingang für Befehle (siehe 5.3), Quittung unter ''…/quittung'' |
+
+===== 5. Miniserver Anbindung =====
+
+==== 5.1 MQTT-Gateway ====
+
+Das Abonnement ''reolink/#'' trägt das Plugin nur beim **Gateway V1** selbst ein. Das **Gateway V2** liest die Abo-Datei von Plugins nicht: Dort ''reolink/#'' **von Hand** im MQTT Gateway unter Abonnements eintragen (das Plugin prüft es im Reiter MQTT). ''reolink/status/ok'' und ''reolink/status/zaehler'' im Gateway auf **No Cache** stellen.
+
+==== 5.2 Virtuelle Eingänge ====
+
+Das Gateway ersetzt ''/'' durch ''_'': ''reolink/hof/person'' wird zu ''reolink_hof_person''. Die Tabelle aller Eingänge zeigt das Plugin im Reiter //Einbindung in Loxone//.
+
+^ Eingang ^ Bedeutung ^
+| ''reolink_hof_verbunden'' | 1 = Kamera verbunden |
+| ''reolink_hof_bewegung'' | 1 = Bewegungserkennung ausgelöst |
+| ''reolink_hof_person'', ''…_fahrzeug'', ''…_tier'' | 1 = KI-Erkennung ausgelöst |
+| ''reolink_hof_alarm'', ''…_alarm_ts'' | Bewegung oder KI ausgelöst, Zeitpunkt des letzten Alarmbeginns |
+| ''reolink_hof_licht_scheinwerfer'', ''…_licht_ir'' | Zustand der Lichter |
+| ''reolink_status_ok'' | 1 = alle Kameras in Ordnung |
+| ''reolink_status_zaehler'' | Lebenszeichen für die Ausfallerkennung |
+
+Das Plugin fragt jede Sekunde ab; die Kamera hält eine Erkennung ohnehin einige Sekunden. Keine Leerzeichen in Kameranamen verwenden. Das Bild der Kamera (RTSP oder Standbild) bindet man direkt in Loxone ein.
+
+==== 5.3 Befehle ====
+
+Freigabe im Reiter //Kameras//. Virtueller Ausgang: Adresse ''/dev/udp/<LoxBerry-IP>/<UDP-Port>'' (Standard 11884, steht im Plugin im Reiter „Einbindung in Loxone“), Befehl bei EIN ''publish reolink/befehl/<name>/<befehl> <wert>'' (ohne HTTP-Header/Body).
+
+^ Befehl ^ Wert ^ Wirkung ^
+| ''scheinwerfer'' | 1 / 0 | Scheinwerfer an (ganztägig) / aus |
+| ''scheinwerfer_modus'' | 0–3 | Betriebsart: 0 aus, 1 automatisch, 2 nachts, 3 Zeitplan |
+| ''scheinwerfer_helligkeit'' | 0–100 | Helligkeit in Prozent |
+| ''ir'' | 1 / 0 | Infrarot-Licht automatisch / aus |
+| ''status_led'' | 1 / 0 | Status-LED an / aus |
+| ''ptz'' | links, rechts, hoch, runter, links_hoch, links_runter, rechts_hoch, rechts_runter, zoom_plus, zoom_minus, stopp | Kamera fährt die eingestellte Zeit und stoppt selbst; ''stopp'' hält sofort an |
+| ''ptz_position'' | 0–63 | gespeicherte Position anfahren (Nummern im Reiter Kameras) |
+| ''zoom'', ''fokus'' | Zahl | Zoomstufe bzw. Fokus absolut |
+| ''autofokus'' | 1 / 0 | Autofokus an / aus |
+| ''sirene'' | 1 / 0 | Alarmton einmal abspielen / stoppen (an der RLC-823S1 geprüft) |
+| ''aufnahme'', ''push'', ''email'', ''ftp'' | 1 / 0 | Aufnahme, Push, E-Mail, FTP der Kamera an / aus |
+
+**Quittung:** Unter ''reolink/befehl/<name>/<befehl>/quittung'' meldet das Plugin zuerst ''angenommen'' und dann ''ausgefuehrt'' oder ''abgelehnt: <Grund>''. Mögliche Gründe: gesperrt (Stufe nicht freigegeben), ungültiger Wert, Kamera nicht verbunden, **diese Kamera unterstützt das nicht**, **der Kamera-Benutzer hat dafür keine Berechtigung** (Administrator nötig), zu schnell (höchstens ein Befehl alle 0,3 Sekunden und Kamera), die Kamera lehnt den Wert ab.
+
+**Scheinwerfer:** Die Kamera schaltet ihn im Zeitplan-Betrieb nur innerhalb ihres Zeitplans. ''scheinwerfer 1'' setzt den Zeitplan deshalb auf ganztägig und merkt sich den bisherigen; ''scheinwerfer 0'' stellt ihn wieder her (zwei Schritte mit zwei Sekunden Pause, die Quittung ''ausgefuehrt'' kommt erst am Ende).
+
+**Hinweis:** Alle Befehle außer der Sirene wurden an einer RLC-823S1 über das Plugin ausprobiert.
+
+===== 6. Tipps & Tricks =====
+
+  * Für einen Alarm eignet sich ''alarm'' (Bewegung oder KI); für „Person erkannt“ ''person'', für „Fahrzeug“ ''fahrzeug''.
+  * ''reolink_status_zaehler'' im Miniserver überwachen: bleibt er stehen, läuft der Dienst nicht mehr.
+  * Für das Plugin einen eigenen Benutzer in der Kamera anlegen und andere Programme (ioBroker-Adapter, NVR) möglichst nicht mit demselben Benutzer anmelden; die Kamera erlaubt nur wenige gleichzeitige Anmeldungen.
+  * Mehrere Befehle in einem virtuellen Ausgang zeitlich versetzen: Das Plugin nimmt höchstens einen Befehl alle 0,3 Sekunden und Kamera an.
+
+===== 7. FAQ / Troubleshooting =====
+
+^ Symptom ^ Ursache / Lösung ^
+| Kästchen rot, „Anmeldung abgelehnt: Benutzer oder Passwort falsch?“ | Benutzer oder Passwort stimmt nicht. Das Plugin probiert nur selten erneut (nach 1, 2, 4, 8 und dann alle 15 Minuten); nach dem Korrigieren verbindet es sich selbst neu |
+| „Zu viele Anmeldungen an der Kamera“ | Die Kamera erlaubt nur wenige gleichzeitige Anmeldungen (App, NVR, ioBroker). Andere Zugriffe beenden |
+| „Zeitüberschreitung“ / „Verbindung abgelehnt (Port geschlossen?)“ | IP-Adresse prüfen; in der Kamera HTTPS oder HTTP einschalten; Port im Plugin eintragen, wenn er geändert wurde |
+| „Webdienst der Kamera antwortet mit HTTP 502“ | Der Webdienst der Kamera ist überlastet oder startet neu; das Plugin verbindet sich selbst neu |
+| Befehl: „der Kamera-Benutzer hat dafür keine Berechtigung“ | Der Plugin-Benutzer ist kein Administrator |
+| Befehl: „diese Kamera unterstützt das nicht“ | Die Kamera hat die Funktion nicht; im Reiter Test steht unter „Sofort abrufen“, welche Befehle sie kennt |
+| Befehl: „Befehle sind gesperrt“ | Die Stufe des Befehls ist für diese Kamera nicht freigegeben (Reiter Kameras) |
+| Keine Werte in Loxone, aber in MQTT | Gateway V2: Abo ''reolink/#'' von Hand eintragen; der Reiter MQTT zeigt, ob es steht |
+| ''status/ok'' = 0 | Eine Kamera ist nicht erreichbar oder die Anmeldung wird abgelehnt. Grund im Reiter Kameras und im Log |
+| In ''start-error.log'' steht einmal „log_db_queryid: Could not find database entry“ | Harmlos: Beim allerersten Start kennt die LoxBerry-Logbibliothek die neue Logdatei noch nicht |
+
+Weitere Hinweise: [[https://github.com/ricten/Reolink2Lox/blob/main/docs/wiki/Fehlersuche.md|Fehlersuche im Repository]].
+
+===== 8. Changelog =====
+
+^ Version ^ Änderung ^
+| 0.1.1 | Schnellere Abfragen (Antwort endet mit Content-Length, auch wenn die Kamera die Verbindung offen hält); „Sofort abrufen“ und „Selbstprüfung“ nutzen die Werte des laufenden Dienstes |
+| 0.1.0 | Erste Version (Beta): Abfrage von bis zu fünf Reolink-Kameras über die lokale HTTP-API, Bewegung und KI-Erkennung, Licht, Zoom, Aufnahme und mehr, Befehle in vier Stufen (ab Werk gesperrt, mit Quittung), automatische Updates, Weboberfläche im LoxBerry Design System. Geprüft an einer RLC-823S1 (ohne Sirene) |

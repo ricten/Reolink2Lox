@@ -1,0 +1,11 @@
+{
+ "cmd": "GetAutoFocus",
+ "code": 0,
+ "value": {
+  "AutoFocus": {
+   "afType": 0,
+   "channel": 0,
+   "disable": 0
+  }
+ }
+}

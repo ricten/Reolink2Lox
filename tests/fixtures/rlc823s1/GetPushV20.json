@@ -1,0 +1,18 @@
+{
+ "cmd": "GetPushV20",
+ "code": 0,
+ "value": {
+  "Push": {
+   "enable": 1,
+   "schedule": {
+    "channel": 0,
+    "table": {
+     "AI_DOG_CAT": "00000000...",
+     "AI_PEOPLE": "00000000...",
+     "AI_VEHICLE": "00000000...",
+     "MD": "00000000..."
+    }
+   }
+  }
+ }
+}

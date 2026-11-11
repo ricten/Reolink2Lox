@@ -1,0 +1,15 @@
+{
+ "cmd": "GetZoomFocus",
+ "code": 0,
+ "value": {
+  "ZoomFocus": {
+   "channel": 0,
+   "focus": {
+    "pos": 310
+   },
+   "zoom": {
+    "pos": 0
+   }
+  }
+ }
+}

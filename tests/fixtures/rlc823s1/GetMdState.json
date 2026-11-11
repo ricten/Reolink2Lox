@@ -1,0 +1,7 @@
+{
+ "cmd": "GetMdState",
+ "code": 0,
+ "value": {
+  "state": 0
+ }
+}

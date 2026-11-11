@@ -1,0 +1,25 @@
+#!/bin/bash
+# Deinstallation (laeuft als root). Beendet den Dienst DIESES Plugin-Ordners und entfernt die RAM-Daten.
+# Argumente von LoxBerry: $1 Temp-Name, $2 Plugin-Name, $3 Plugin-Ordner, $4 Version, $5 LBHOMEDIR
+# Der Ordner kommt aus $3 (kann z. B. reolink2lox_000 heissen). Ein fest eingetragener Ordner wuerde den Dienst eines anderen Plugins beenden.
+FOLDER="${3:-reolink2lox}"
+PIDFILE="/dev/shm/$FOLDER/reolink.pid"
+
+if [ -f "$PIDFILE" ]; then
+    PID="$(cat "$PIDFILE")"
+    if [ -n "$PID" ] && kill "$PID" 2>/dev/null; then
+        for i in $(seq 1 20); do      # bis zu 10 s auf ein sauberes Ende warten
+            kill -0 "$PID" 2>/dev/null || break
+            sleep 0.5
+        done
+        kill -9 "$PID" 2>/dev/null
+    fi
+fi
+
+# Sicherheitsnetz: Prozesse aus dem Programmordner genau dieses Plugins
+if command -v pkill >/dev/null 2>&1; then
+    pkill -f "plugins/$FOLDER/reolinkd.php" 2>/dev/null
+fi
+
+rm -rf "/dev/shm/$FOLDER"
+exit 0

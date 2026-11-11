@@ -1,0 +1,23 @@
+{
+ "cmd": "GetRecV20",
+ "code": 0,
+ "value": {
+  "Rec": {
+   "enable": 0,
+   "overwrite": 1,
+   "packTime": "",
+   "postRec": "15 Seconds",
+   "preRec": 1,
+   "schedule": {
+    "channel": 0,
+    "table": {
+     "AI_DOG_CAT": "11111111...",
+     "AI_PEOPLE": "11111111...",
+     "AI_VEHICLE": "11111111...",
+     "MD": "11111111...",
+     "TIMING": "00000000..."
+    }
+   }
+  }
+ }
+}

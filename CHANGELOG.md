@@ -1,0 +1,25 @@
+# Changelog
+
+Alle Änderungen an diesem Plugin. Schema: MAJOR.MINOR.PATCH.
+
+## [0.1.1] - 2026-11-11
+
+### Behoben
+- Zu langsame Abfragen: Der HTTP-Client wartete bis zum Schließen der Verbindung. Hält eine Kamera die Verbindung nach der Antwort offen, dauerte jede Anfrage bis zur Zeitgrenze von 10 s. Jetzt endet das Lesen mit dem Ende der Antwort (Content-Length).
+- „Sofort abrufen“ und „Selbstprüfung“ (Reiter Test) meldeten sich bei jeder Kamera ein zweites Mal an, nacheinander und mit bis zu 25 s je Kamera; bei zwei Kameras konnte das die Zeitgrenze von PHP überschreiten. Läuft der Dienst, zeigen beide jetzt dessen aktuelle Werte (sofort, ohne zweite Sitzung an der Kamera). Nur ohne laufenden Dienst melden sie sich selbst an, ohne PHP-Zeitgrenze.
+
+### Geändert
+- `status.json` enthält je Kamera die aktuellen Topics (nur für die Weboberfläche, liegt im RAM).
+
+## [0.1.0] - 2026-11-11
+
+Erste Fassung (Beta). Geprüft an einer Reolink RLC-823S1 (Firmware v3.1.0.4885); andere Modelle nach der API-Beschreibung der Bibliothek `reolink_aio`.
+
+### Neu
+- Bis zu fünf Kameras, je mit eigenem Namen im Topic (`reolink/<name>/…`), Zugriff über die lokale HTTP-API der Kamera (HTTPS mit selbst signiertem Zertifikat oder HTTP, automatisch).
+- Bewegungserkennung und KI-Erkennung (Person, Fahrzeug, Tier, je nach Modell Gesicht, Paket, Besucher) im Sekundentakt, dazu `alarm` und `alarm_ts`.
+- Zustand von Scheinwerfer (Zustand, Betriebsart, Helligkeit), Infrarot-Licht, Status-LED, Zoom, Fokus, Autofokus, Aufnahme, Push, E-Mail und FTP, Kamera-Last, Speicherkarte, Modell und Firmware.
+- Befehle aus Loxone mit Quittung, ab Werk gesperrt, in vier Stufen je Kamera: Licht, Schwenken/Zoom/Fokus, Sirene, Aufnahme und Meldungen. Richtungsbefehle stoppt das Plugin nach einer einstellbaren Zeit selbst.
+- Anmeldung mit Token: eine Sitzung je Kamera, Erneuerung vor Ablauf, Abmelden beim Beenden; Mindestabstand zwischen Anfragen (die Kamera ist empfindlich).
+- Fehlerfälle: Kamera nicht erreichbar, HTTP 502 der Kamera, abgelaufenes Token, Sitzungsgrenze, falsches Passwort (selten wiederholt, damit die Kamera den Zugang nicht sperrt) ergeben `status/ok` = 0, `verbunden` = 0; das Lebenszeichen läuft weiter.
+- Weboberfläche im LoxBerry Design System: Kameras, MQTT, Einbindung in Loxone, Test, Logdateien; Healthcheck; automatische Updates über `release.cfg`.

@@ -1,0 +1,456 @@
+{
+ "cmd": "GetPtzPreset",
+ "code": 0,
+ "value": {
+  "PtzPreset": [
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 0,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 1,
+    "id": 1,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 1,
+    "id": 2,
+    "imgName": "preset_02",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 3,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 4,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 5,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 6,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 7,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 8,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 9,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 10,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 11,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 12,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 13,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 14,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 15,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 16,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 17,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 18,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 19,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 20,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 21,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 22,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 23,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 24,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 25,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 26,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 27,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 28,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 29,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 30,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 31,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 32,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 33,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 34,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 35,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 36,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 37,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 38,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 39,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 40,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 41,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 42,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 43,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 44,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 45,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 46,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 47,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 48,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 49,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 50,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 51,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 52,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 53,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 54,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 55,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 56,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 57,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 58,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 59,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 60,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 61,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 62,
+    "imgName": "",
+    "name": "<anonym>"
+   },
+   {
+    "channel": 0,
+    "enable": 0,
+    "id": 63,
+    "imgName": "",
+    "name": "<anonym>"
+   }
+  ]
+ }
+}

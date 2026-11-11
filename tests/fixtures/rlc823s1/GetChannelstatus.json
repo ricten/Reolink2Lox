@@ -1,0 +1,15 @@
+{
+ "cmd": "GetChannelstatus",
+ "code": 0,
+ "value": {
+  "count": 1,
+  "status": [
+   {
+    "channel": 0,
+    "name": "<anonym>",
+    "online": 1,
+    "typeInfo": "RLC-823S1"
+   }
+  ]
+ }
+}

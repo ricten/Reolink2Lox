@@ -1,0 +1,54 @@
+#!/usr/bin/php
+<?php
+/**
+ * Healthcheck fuer die LoxBerry-Healthcheck-Seite ("Mein LoxBerry" > "Healthcheck").
+ * Aufruf: "healthcheck title" (nur die Beschreibung) oder "healthcheck check" (Pruefung, Ausgabe als JSON).
+ * Statuscodes: 3 Fehler (Benachrichtigung und E-Mail), 4 Warnung, 5 OK, 6 Info.
+ * Der Dienst schreibt seinen Zustand jede Sekunde nach /dev/shm/<Ordner>/status.json; hier wird nur gelesen.
+ * Muss schnell sein und darf nichts anderes ausgeben als das JSON.
+ */
+$desc = 'Reolink2Lox: Dienst, MQTT-Broker und Kameras';
+$arg = $argv[1] ?? '';
+if ($arg === 'title') {
+    echo $desc, "\n";
+    exit(0);
+}
+if ($arg !== 'check') {
+    exit(0);
+}
+
+$dev = getenv('RLK_DEV_DIR');
+$run = getenv('RLK_DEV_RUN') ?: ($dev ? $dev . '/run' : '/dev/shm/REPLACELBPPLUGINDIR');
+$log = $dev ? $dev . '/reolink.log' : 'REPLACELBPLOGDIR/reolink.log';
+
+function ergebnis(string $desc, int $status, string $text, string $log): void
+{
+    $o = ['desc' => $desc, 'status' => $status, 'result' => trim((string)preg_replace('/\s+/', ' ', $text))];
+    if (is_file($log)) {
+        $o['logfile'] = $log;           // nur mit echtem Wert, sonst fuehrt der Knopf ins Leere
+    }
+    echo json_encode($o, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), "\n";
+    exit(0);
+}
+
+$st = is_file("$run/status.json") ? json_decode((string)@file_get_contents("$run/status.json"), true) : null;
+if (!is_array($st) || time() - (int)($st['time'] ?? 0) > 60) {
+    ergebnis($desc, 3, 'Der Dienst läuft nicht (keine aktuelle Statusmeldung). Der Wächter startet ihn spätestens nach einer Minute neu; sonst im Plugin den Reiter „Test“ und die Logdatei ansehen.', $log);
+}
+if (empty($st['mqtt'])) {
+    ergebnis($desc, 4, 'Keine Verbindung zum MQTT-Broker: ' . ($st['mqtt_error'] ?? 'unbekannt'), $log);
+}
+$kameras = is_array($st['kameras'] ?? null) ? $st['kameras'] : [];
+if (!$kameras) {
+    ergebnis($desc, 6, 'Keine Kamera eingerichtet (Plugin öffnen, Reiter „Kameras“).', $log);
+}
+$fehler = [];
+foreach ($kameras as $name => $r) {
+    if (empty($r['ok'])) {
+        $fehler[] = $name . ' (' . ($r['error'] ?? 'Fehler') . ')';
+    }
+}
+if ($fehler) {
+    ergebnis($desc, 4, 'Kameras mit Problem: ' . implode(', ', $fehler), $log);
+}
+ergebnis($desc, 5, count($kameras) . ' Kamera(s) in Ordnung, Version ' . ($st['version'] ?? '?'), $log);

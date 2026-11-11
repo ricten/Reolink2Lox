@@ -1,0 +1,13 @@
+*.zip
+build/
+*.log
+*.local.cfg
+
+# Testlaufzeit
+tests/tmp/
+
+# Python
+__pycache__/
+
+# Vorlage fuer das Logo: aus einem Produktfoto des Herstellers abgeleitet, nicht im Repo
+tools/kamera_vorlage.png

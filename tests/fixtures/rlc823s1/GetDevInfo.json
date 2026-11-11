@@ -1,0 +1,28 @@
+{
+ "cmd": "GetDevInfo",
+ "code": 0,
+ "value": {
+  "DevInfo": {
+   "B485": 0,
+   "IOInputNum": 0,
+   "IOOutputNum": 0,
+   "audioNum": 1,
+   "buildDay": "build 25051904",
+   "cfgVer": "v3.1.0.0",
+   "channelNum": 1,
+   "detail": "IPC_NT2NA48MPSD12S16A7T60E1W011",
+   "diskNum": 1,
+   "exactType": "IPC",
+   "firmVer": "v3.1.0.4885_25051904_v1.0.0.146",
+   "frameworkVer": 1,
+   "hardVer": "IPC_NT2NA48MPSD12",
+   "itemNo": "P840",
+   "model": "RLC-823S1",
+   "name": "<anonym>",
+   "pakSuffix": "pak,paks",
+   "serial": "<anonym>",
+   "type": "IPC",
+   "wifi": 0
+  }
+ }
+}

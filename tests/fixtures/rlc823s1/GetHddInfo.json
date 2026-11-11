@@ -1,0 +1,7 @@
+{
+ "cmd": "GetHddInfo",
+ "code": 0,
+ "value": {
+  "HddInfo": []
+ }
+}
