@@ -6,7 +6,7 @@ Konfiguration, Referenz, Miniserver-Anbindung, FAQ, Changelog).
 
 ## Vor dem Einstellen anpassen
 
-- `FORUM-LINK-EINTRAGEN`: Link zum Forenbeitrag des Plugins (Zeile „Diskussion“ der Plugin-Daten).
+- Der Link zum Forenbeitrag steht schon in der Zeile „Diskussion“ der Plugin-Daten (bei einem neuen Beitrag dort anpassen).
 - Bild `plugins:reolink2lox:reolink2lox.png`: Datei `docs/logo/reolink2lox.png` im Medien-Manager des Wikis hochladen
   (Namensraum `plugins:reolink2lox`).
 - Das Feld **Status** („BETA“) und **Min. LB Version** („4.0“) prüfen. Die Version steht in `reolink2lox/plugin.cfg`.

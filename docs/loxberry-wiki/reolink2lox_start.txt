@@ -12,7 +12,7 @@
 ^ Quellcode | [[https://github.com/ricten/Reolink2Lox|github.com/ricten/Reolink2Lox]] (MIT-Lizenz) |
 ^ Beschreibung | Fragt Reolink-Kameras über ihre lokale HTTP-API ab (kein Cloud-Zugriff) und veröffentlicht Bewegung, KI-Erkennung (Person, Fahrzeug, Tier), Licht, Zoom, Aufnahme und mehr per MQTT. Über das LoxBerry-MQTT-Gateway gelangen die Werte an den Loxone Miniserver. Dazu Befehle aus Loxone (Scheinwerfer, Infrarot, Schwenken, Zoom, Positionen, Aufnahme, Push, E-Mail, FTP, Sirene), ab Werk gesperrt und mit Quittung. Bis zu fünf Kameras. Ersatz für den ioBroker-Adapter reolink. |
 ^ Sprachen | DE |
-^ Diskussion | FORUM-LINK-EINTRAGEN |
+^ Diskussion | https://www.loxforum.com/forum/projektforen/loxberry/plugins/495006-loxberry-plugin-reolink2lox-%E2%80%93-reolink-kameras-per-mqtt-an-den-miniserver |
 
 ----
 
