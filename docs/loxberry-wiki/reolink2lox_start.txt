@@ -5,7 +5,7 @@
 ^ Autor | Rico Tengler |
 ^ Logo | {{:plugins:reolink2lox:reolink2lox.png?64|Reolink2Lox}} |
 ^ Status | BETA |
-^ Version | 0.1.2 |
+^ Version | 0.1.3 |
 ^ Min. LB Version | 4.0.0.0 |
 ^ Release Download | https://github.com/ricten/Reolink2Lox/releases/latest/download/reolink2lox.zip |
 ^ Pre-Release Download | - |
@@ -208,6 +208,7 @@ Weitere Hinweise: [[https://github.com/ricten/Reolink2Lox/blob/main/docs/wiki/Fe
 ===== 8. Changelog =====
 
 ^ Version ^ Änderung ^
+| 0.1.3 | Installation und Update prüfen PHP 8.2 oder neuer und brechen sonst mit einer klaren Meldung ab (statt HTTP 500 in der Weboberfläche) |
 | 0.1.2 | Läuft auch mit PHP 8.2 und 8.3 (bisher PHP 8.4 nötig) |
 | 0.1.1 | Schnellere Abfragen (Antwort endet mit Content-Length, auch wenn die Kamera die Verbindung offen hält); „Sofort abrufen“ und „Selbstprüfung“ nutzen die Werte des laufenden Dienstes |
 | 0.1.0 | Erste Version (Beta): Abfrage von bis zu fünf Reolink-Kameras über die lokale HTTP-API, Bewegung und KI-Erkennung, Licht, Zoom, Aufnahme und mehr, Befehle in vier Stufen (ab Werk gesperrt, mit Quittung), automatische Updates, Weboberfläche im LoxBerry Design System. Geprüft an einer RLC-823S1 (ohne Sirene) |

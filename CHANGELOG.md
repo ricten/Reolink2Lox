@@ -2,6 +2,12 @@
 
 Alle Änderungen an diesem Plugin. Schema: MAJOR.MINOR.PATCH.
 
+## [0.1.3] - 2026-11-11
+
+### Geändert
+- Installation und Update prüfen jetzt, ob PHP 8.2 oder neuer verfügbar ist (Kommandozeile und Apache). Ist es älter, bricht `preinstall.sh` bzw. `preupgrade.sh` mit einer klaren Meldung im Installationslog ab (Hinweis auf LoxBerry 4.0 mit Debian 13 und die Upgrade-Anleitung des LoxBerry-Wikis), statt dass die Weboberfläche nach der Installation mit HTTP 500 antwortet. Bei einem Update bleibt die alte Version dabei unverändert erhalten. Test: `bash tests/test_phpcheck.sh`.
+- Doku: PHP 8.2 oder neuer hat ein LoxBerry 4.0 auf Debian 13 (Trixie); auf Debian 11 und 12 ist meist PHP 7.4 aktiv.
+
 ## [0.1.2] - 2026-11-11
 
 ### Behoben
