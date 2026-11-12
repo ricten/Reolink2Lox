@@ -32,7 +32,7 @@
 ## Voraussetzungen
 
 - LoxBerry ≥ 4.0 mit aktivem MQTT-Broker (Mosquitto) und MQTT-Gateway (oder eigener Broker)
-- PHP ≥ 8.2 (Kommandozeile und Web). Das hat LoxBerry 4.0 auf Debian 13 (Trixie); auf Debian 11 und 12 ist meist PHP 7.4 aktiv, dann zuerst die Debian-Version anheben ([Anleitung im LoxBerry-Wiki](https://wiki.loxberry.de/installation_von_loxberry/upgrade_distribution/start)). Die Installation prüft das und bricht sonst mit einem Hinweis ab
+- PHP ≥ 7.4 (Kommandozeile und Web). Das bringt LoxBerry 4.0 auf Debian 11, 12 und 13 mit (PHP 7.4 bis 8.4). Die Installation prüft das und bricht sonst mit einem Hinweis ab
 - Eine Reolink-Kamera im selben Netz mit aktivem HTTPS- oder HTTP-Zugriff und einem Benutzer für das Plugin (Schalten braucht einen Administrator; siehe [Installation](Installation.md))
 
 ## Lizenz

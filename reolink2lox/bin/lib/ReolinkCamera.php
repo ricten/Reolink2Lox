@@ -47,9 +47,24 @@ final class ReolinkCamera
     private array $unterstuetzt = [];           // Schluessel => bool (aus Faehigkeiten und Probeabfragen)
     private ?array $folge = null;               // Befehl mit mehreren Schritten: ['befehl','wert','b','cmds','rest','zeit'] (die Kamera braucht Zeit zwischen den Schritten)
 
-    public function __construct(private array $cfg, private readonly Logger $log, private int $abfrageAlarm = 1, private int $abfrageStatus = 30,
-                                private int $ptzDauer = 1, private int $ptzGeschwindigkeit = 32, private readonly ?string $datenDir = null)
+    private array $cfg;
+    private Logger $log;
+    private int $abfrageAlarm;
+    private int $abfrageStatus;
+    private int $ptzDauer;
+    private int $ptzGeschwindigkeit;
+    private ?string $datenDir;
+
+    public function __construct(array $cfg, Logger $log, int $abfrageAlarm = 1, int $abfrageStatus = 30,
+                                int $ptzDauer = 1, int $ptzGeschwindigkeit = 32, ?string $datenDir = null)
     {
+        $this->cfg = $cfg;
+        $this->log = $log;
+        $this->abfrageAlarm = $abfrageAlarm;
+        $this->abfrageStatus = $abfrageStatus;
+        $this->ptzDauer = $ptzDauer;
+        $this->ptzGeschwindigkeit = $ptzGeschwindigkeit;
+        $this->datenDir = $datenDir;
         $this->name = $cfg['name'];
         $this->api = self::neueApi($cfg);
     }

@@ -23,10 +23,27 @@ final class ReolinkApi
     private ?array $ziel = null;
     private float $letzte = 0.0;
 
-    public function __construct(private readonly string $host, private readonly int $port, private readonly string $schema,
-                                private readonly string $benutzer, private readonly string $passwort,
-                                private readonly float $verbindungsZeit = 3.0, private readonly float $zeit = 10.0, private readonly float $mindestAbstand = 0.25)
+    private string $host;
+    private int $port;
+    private string $schema;
+    private string $benutzer;
+    private string $passwort;
+    private float $verbindungsZeit;
+    private float $zeit;
+    private float $mindestAbstand;
+
+    public function __construct(string $host, int $port, string $schema,
+                                string $benutzer, string $passwort,
+                                float $verbindungsZeit = 3.0, float $zeit = 10.0, float $mindestAbstand = 0.25)
     {
+        $this->host = $host;
+        $this->port = $port;
+        $this->schema = $schema;
+        $this->benutzer = $benutzer;
+        $this->passwort = $passwort;
+        $this->verbindungsZeit = $verbindungsZeit;
+        $this->zeit = $zeit;
+        $this->mindestAbstand = $mindestAbstand;
     }
 
     public function eingeloggt(): bool

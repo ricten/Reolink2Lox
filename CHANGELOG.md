@@ -2,6 +2,13 @@
 
 Alle Änderungen an diesem Plugin. Schema: MAJOR.MINOR.PATCH.
 
+## [0.1.4] - 2026-11-12
+
+### Geändert
+- **Läuft jetzt auch mit PHP 7.4** (Debian 11 und 12) sowie weiterhin mit PHP 8.2, 8.3 und 8.4: PHP-8-Syntax (Konstruktor-Promotion, `readonly`, `match`, Union-Typen, `mixed`, `catch` ohne Variable) wurde umgebaut, die Funktionen `str_contains`, `str_starts_with`, `str_ends_with` und `array_is_list` haben einen Rückfall. Das Verhalten ist unverändert, die Topics bleiben gleich.
+- Installation und Update verlangen jetzt mindestens PHP 7.4 (bisher 8.2). Ältere PHP-Versionen brechen weiterhin mit einer klaren Meldung ab.
+- Getestet mit PHP 7.4, 8.2, 8.3 und 8.4.
+
 ## [0.1.3] - 2026-11-11
 
 ### Geändert

@@ -258,9 +258,8 @@ Richtungsbefehle fährt die Kamera nur die eingestellte Zeit und das Plugin stop
 <?php
 foreach ($namen as $a) {
     foreach (ReolinkCommands::LISTE as $k => [$stufe, , $text]) {
-        $w = match ($k) {
-            'scheinwerfer_modus' => '0–3', 'scheinwerfer_helligkeit' => '0–100', 'ptz' => 'links, rechts, hoch, runter, …, stopp', 'ptz_position' => '0–63', 'zoom', 'fokus' => 'Zahl', default => '1 oder 0',
-        };
+        $werte = ['scheinwerfer_modus' => '0–3', 'scheinwerfer_helligkeit' => '0–100', 'ptz' => 'links, rechts, hoch, runter, …, stopp', 'ptz_position' => '0–63', 'zoom' => 'Zahl', 'fokus' => 'Zahl'];
+        $w = $werte[$k] ?? '1 oder 0';
         echo '<tr><td>reolink/befehl/' . h($a) . '/' . h($k) . '</td><td>' . h($w) . '</td><td>' . h(ReolinkConfig::STUFEN[$stufe]) . '</td><td>' . h($text) . '</td></tr>';
     }
 }

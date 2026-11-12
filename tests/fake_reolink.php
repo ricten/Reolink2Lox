@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../common/php/Util.php';    // Rueckfaelle fuer PHP 7.4 (str_contains usw.)
 /**
  * Fake-Reolink-Kamera fuer Tests: php tests/fake_reolink.php <port> <verzeichnis> [<zertifikat.pem>|-] [profil]
  *

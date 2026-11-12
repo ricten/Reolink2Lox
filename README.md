@@ -1,7 +1,7 @@
 # Reolink2Lox – LoxBerry-Plugin
 <img src="docs/logo/reolink2lox.png" alt="Reolink2Lox Logo" width="128">
 
-**Version 0.1.3** · Benötigt LoxBerry 4 (PHP ≥ 8.2) · [Changelog](CHANGELOG.md)
+**Version 0.1.4** · Benötigt LoxBerry 4 (PHP ≥ 7.4) · [Changelog](CHANGELOG.md)
 
 Dokumentation: [docs/wiki/Home.md](docs/wiki/Home.md)
 
